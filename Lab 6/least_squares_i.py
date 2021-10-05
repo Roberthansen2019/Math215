@@ -13,28 +13,28 @@ Enter your code in the spaces provided. Do not change any of the variable names 
 
 # Do not edit this cell.
 
-LabID="Lab6"
+LabID = "Lab6"
 
 try:
-  from graderHelp import ISGRADEPLOT
+    from graderHelp import ISGRADEPLOT
 except ImportError:
-  ISGRADEPLOT = True
+    ISGRADEPLOT = True
 
 """**Enter your name, section number, and BYU NetID**"""
 
 # Enter your first and last names in between the quotation marks.
 
-first_name="Nicholas"
+first_name = "Nicholas"
 
-last_name="Oxenden"
+last_name = "Oxenden"
 
-# Enter your Math 215 section number in between the quotation marks. 
+# Enter your Math 215 section number in between the quotation marks.
 
-section_number="001"  
+section_number = "001"
 
-# Enter your BYU NetID in between the quotation marks.  NOT YOUR BYU ID NUMBER! 
+# Enter your BYU NetID in between the quotation marks.  NOT YOUR BYU ID NUMBER!
 
-BYUNetID="noxenden"
+BYUNetID = "noxenden"
 
 """**Import NumPy**"""
 
@@ -44,42 +44,59 @@ import numpy as np
 
 # Replace the values of 0 with the NumPy arrays from Problem 1.
 
-X1 = np.array([[1,5],[1,10],[1,15],[1,20],[1,25],[1,30],[1,35],[1,40],[1,45],[1,50]])
+X1 = np.array(
+    [
+        [1, 5],
+        [1, 10],
+        [1, 15],
+        [1, 20],
+        [1, 25],
+        [1, 30],
+        [1, 35],
+        [1, 40],
+        [1, 45],
+        [1, 50],
+    ]
+)
 
-Y1 = np.array([3.33,4.43,4.39,5.23,5.67,6.06,7.01,7.16,8.03,8.78]) 
+Y1 = np.array([3.33, 4.43, 4.39, 5.23, 5.67, 6.06, 7.01, 7.16, 8.03, 8.78])
 
 """**Problem 2**"""
 
 # Replace the values of 0 with the normal equation coefficient matrix and normal equation right-hand side respectively from Problem 2.
 
-normal_coef1 = X1.T@X1
+normal_coef1 = X1.T @ X1
 
-normal_vect1 = X1.T@Y1 
+normal_vect1 = X1.T @ Y1
 
 """**Problem 3**"""
 
 # Replace the value of 0 with the least squares solution beta1 you found in Problem 3.
 
-beta1 = np.linalg.solve(normal_coef1,normal_vect1)
+beta1 = np.linalg.solve(normal_coef1, normal_vect1)
 
 # Define a function whose graph is the line of best fit.
 
-def ls1_line(x): 
-  return beta1[0] + (x * beta1[1])
+
+def ls1_line(x):
+    return beta1[0] + (x * beta1[1])
+
 
 import matplotlib.pyplot as plt
 
 # Construct your plot of ls1_line and the corresponding data points here. Put all of your code to create the plots inside the function below.
 
+
 def create_plots1():
-  
-  y_vals = ls1_line(X1[:,1])
 
-  plt.scatter(X1[:,1], Y1)
-  plt.plot(X1[:,1],y_vals)
-  plt.show()
+    y_vals = ls1_line(X1[:, 1])
 
-  return None
+    plt.scatter(X1[:, 1], Y1)
+    plt.plot(X1[:, 1], y_vals)
+    plt.show()
+
+    return None
+
 
 # Replace the value of 0 with your prediction of the satellite's velocity at t=60.
 
@@ -89,34 +106,39 @@ pred1 = ls1_line(60)
 
 # Replace the values of 0 with the NumPy arrays from Problem 4.
 
-arr1 = np.arange(5,51,5)
-arr2 = (np.arange(5,51,5) ** 2)
-X2 = np.column_stack((arr1,arr2))
+arr1 = np.arange(5, 51, 5)
+arr2 = np.arange(5, 51, 5) ** 2
+X2 = np.column_stack((arr1, arr2))
 
-Y2 = np.array([20.57,87.48,197.45,347.67,546.12,784.35,1066.02,1390.97,1761.85,2177.34])
+Y2 = np.array(
+    [20.57, 87.48, 197.45, 347.67, 546.12, 784.35, 1066.02, 1390.97, 1761.85, 2177.34]
+)
 
 """**Problem 5**"""
 
 # Replace the values of 0 with the normal equation coefficient matrix and normal equation right-hand side, and least squares solution from Problem 5.
 
-normal_coef2 = X2.T@X2
+normal_coef2 = X2.T @ X2
 
-normal_vect2 = X2.T@Y2
+normal_vect2 = X2.T @ Y2
 
-beta2 = np.linalg.solve(normal_coef2,normal_vect2)
+beta2 = np.linalg.solve(normal_coef2, normal_vect2)
 
 """**Problem 6**"""
 
 # Define a function whose graph is the parabola of best fit.
 
+
 def ls2_par(x):
-  return beta2[0] + ((beta2[1]) * (x**2)) 
+    return beta2[0] + ((beta2[1]) * (x ** 2))
+
 
 def create_plots2():
 
-  plt.scatter(X2[:,0],Y2)
-  plt.plot(X2[:,0],ls2_par(X2[:,0]))
-  return None
+    plt.scatter(X2[:, 0], Y2)
+    plt.plot(X2[:, 0], ls2_par(X2[:, 0]))
+    return None
+
 
 # Replace the value of 0 with your prediction of the satellite's position at t=60.
 
@@ -127,31 +149,32 @@ pred2 = ls2_par(60)
 # Replace the values of 0 with the NumPy arrays from Problem 7.
 
 
-X3 = np.log(np.array([87.77,224.70,365.25,686.95,4332.62,10759.2]))
-X3 = np.column_stack((np.ones(len(X3)),X3))
+X3 = np.log(np.array([87.77, 224.70, 365.25, 686.95, 4332.62, 10759.2]))
+X3 = np.column_stack((np.ones(len(X3)), X3))
 
-
-Y3 = np.log(np.array([.389,.724,1,1.524,5.2,9.510]))
+Y3 = np.log(np.array([0.389, 0.724, 1, 1.524, 5.2, 9.510]))
 
 # Replace the values of 0 with the normal equation coefficient matrix and normal equation right-hand side from Problem 7.
 
-normal_coef3 = X3.T@X3
+normal_coef3 = X3.T @ X3
 
-normal_vect3 = X3.T@Y3
+normal_vect3 = X3.T @ Y3
 
 # Replace the value of 0 with the least squares solution from Problem 7.
 
-beta3 = np.linalg.solve(normal_coef3,normal_vect3)
+beta3 = np.linalg.solve(normal_coef3, normal_vect3)
 
 """**Problem 8**"""
 
 # Replace the values of 0 with your predictions for the semi-major axes of Uranus and Neptune.
 
-def pred_r(x):
-  # coef = np.e ** beta3[1]
-  return np.e ** beta3[0] + ((np.e ** beta3[1]) * x)
 
-pred_x = np.array([30687.15,60190.03])
+def pred_r(x):
+    # coef = np.e ** beta3[1]
+    return np.e ** beta3[0] + ((np.e ** beta3[1]) * x)
+
+
+pred_x = np.array([30687.15, 60190.03])
 pred_y = pred_r(pred_x)
 
 pred_Uran = pred_r(pred_x[0])
