@@ -15,10 +15,10 @@ Enter your code in the spaces provided. Do not change any of the variable names 
 
 LabID = "Lab6"
 
-try:
-    from graderHelp import ISGRADEPLOT
-except ImportError:
-    ISGRADEPLOT = True
+# try:
+#     from graderHelp import ISGRADEPLOT
+# except ImportError:
+#     ISGRADEPLOT = True
 
 """**Enter your name, section number, and BYU NetID**"""
 
