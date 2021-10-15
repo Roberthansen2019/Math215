@@ -147,6 +147,44 @@ MSE2 = (1 / 629) * np.linalg.norm(
 
 # Replace the 0 values with the values requested in Problem 9.  Remember to copy the decimal values from your practice notebook, not the formulas you used to compute them.
 
+X10 = design_matrix(1000)
+normal_coef10 = X10.T @ X10
+normal_vect10 = X10.T @ Y
+beta10 = np.linalg.solve(normal_coef10, normal_vect10)
+MSE10 = (1 / 629) * np.linalg.norm(X10 @ beta10 - Y) ** 2
+
+
+def f10(t):
+    return np.dot(beta10, np.array(row_func(t, 1000)))
+
+
+pred10 = f10(t=0.105)
+
+print(MSE10, pred10)
+
+
+# This creates a new function, vf2, which is
+# the same as f2 except for the fact that is
+# can take a NumPy array as input, instead of
+# individual values.
+vf2 = np.vectorize(f10)
+
+# Creating the plot of the data points in Y
+# using small red dots.
+plt.plot(T, Y, "r.")
+
+# Creating the plot of the function f2 with a
+# blue line. Here we use the function vf2
+# instead of f2, since we are plugging in a
+# NumPy array T.
+T_fine = np.linspace(0, 6.28, 3000)
+plt.plot(T_fine, f10(T_fine), "b-")
+
+
+plt.show()  # Display the plots.
+
+pred10 = f10(t=0.105)
+
 MSE10 = 0.009348751458203415
 
 pred10 = 0.508775756541652
@@ -155,17 +193,17 @@ pred10 = 0.508775756541652
 
 # Replace the 0 values with the values requested in Problem 10.  Remember to copy the decimal values from your practice notebook, not the formulas you used to compute them.
 
-MSE100 = 0.0014547562364331285
+MSE100 = 0
 
-pred100 = 0.5089902472113175
+pred100 = 0
 
 """**Problem 11**"""
 
 # Replace the 0 values with the values requested in Problem 11.  Remember to copy the decimal values from your practice notebook, not the formulas you used to compute them.
 
-MSE1000 = 4.510007131621212e-28
+MSE1000 = 0
 
-pred1000 = 3.239585483587761
+pred1000 = 0
 
 """**STOP!  BEFORE YOU SUBMIT THIS LAB:**  Go to the "Runtime" menu at the top of this page, and select "Restart and run all".  If any of the cells produce error messages, you will either need to fix the error(s) or delete the code that is causing the error(s).  Then use "Restart and run all" again to see if there are any new errors.  Repeat this until no new error messages show up.
 
