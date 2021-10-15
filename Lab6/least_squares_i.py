@@ -130,7 +130,7 @@ beta2 = np.linalg.solve(normal_coef2, normal_vect2)
 
 
 def ls2_par(x):
-    return beta2[0] + ((beta2[1]) * (x ** 2))
+    return (beta2[0] * x) + ((beta2[1]) * (x ** 2))
 
 
 def create_plots2():
@@ -147,6 +147,13 @@ pred2 = ls2_par(60)
 """**Problem 7**"""
 
 # Replace the values of 0 with the NumPy arrays from Problem 7.
+
+string = """Mercury	0.389	87.77
+Venus	0.724	224.70
+Earth	1	365.25
+Mars	1.524	686.95
+Jupiter	5.2	4332.62
+Saturn	9.510	10759.2"""
 
 
 X3 = np.log(np.array([87.77, 224.70, 365.25, 686.95, 4332.62, 10759.2]))
@@ -170,8 +177,7 @@ beta3 = np.linalg.solve(normal_coef3, normal_vect3)
 
 
 def pred_r(x):
-    # coef = np.e ** beta3[1]
-    return np.e ** beta3[0] + ((np.e ** beta3[1]) * x)
+    return np.exp(beta3[0]) * pow(x, beta3[1])
 
 
 pred_x = np.array([30687.15, 60190.03])
