@@ -47,7 +47,7 @@ import numpy as np
 
 def transform(x):
     lin_trans = np.array([[2, 1], [1, -3], [0, 1]])
-    return lin_trans @ x.T
+    return lin_trans @ x
 
 
 """**Downloading and visualizing our data**
@@ -129,8 +129,16 @@ def rotate(image, theta):
 
 iden = np.array([[1, 0], [0, 1]])  # The identity matrix may be helpful here.
 
-comp_matrix = stretch(
-    reflect(rotate(stretch(cougar, 1, 2), np.pi / 4), -2, 3), 1 / 2, 1
+transformations = [
+    stretch(iden, 1, 2),
+    rotate(iden, -np.pi / 4),
+    reflect(iden, -2, 3),
+    stretch(iden, 1 / 2, 1),
+]
+
+
+comp_matrix = (
+    transformations[3] @ transformations[2] @ transformations[1] @ transformations[0]
 )
 
 
@@ -167,7 +175,6 @@ def plot_transformation(mat):
 def area(A):
     e1 = np.array([1, 0])
     e2 = np.array([0, 1])
-    v3 = e1 + e2
 
     e1_T = A @ e1
     e2_T = A @ e2
@@ -187,7 +194,7 @@ def area(A):
 
 detM = np.linalg.det(np.array([[2, 1], [-2, 4]]))
 
-detN = np.lingalg.det(np.array([[3, 1], [2, -1]]))
+detN = np.linalg.det(np.array([[3, 1], [2, -1]]))
 
 detP = np.linalg.det(np.array([[-1, 2], [-1, -1]]))
 
@@ -209,7 +216,7 @@ detB1 = np.linalg.det(np.array([[4, 3], [2, 6]]))
 
 detB3 = np.linalg.det(np.array([[1.5, 3], [2, 6]]))
 
-detB6 = np.linalg.det(np.array([[1.00001, 3], [2, 3]]))
+detB6 = np.linalg.det(np.array([[1.00001, 3], [2, 6]]))
 
 detB0 = np.linalg.det(np.array([[1, 3], [2, 6]]))
 
