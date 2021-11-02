@@ -62,17 +62,14 @@ def evect_approx1(x_0, k):
 
 
 def eval_approx1(x_0, k):
-    A = np.array([[1, 1], [2, 0]])
-    x = x_0
-    for j in range(1, k):
-        temp_var = A @ x
-        lam = temp_var[0] / x[0]
-        x = temp_var
 
-    return lam
+    x_k = evect_approx1(x_0, k)
+    x_k_1 = evect_approx1(x_0, k + 1)
+
+    return x_k_1[0] / x_k[0]
 
 
-eval_approx1(np.array([1, 9]), 10)
+# eval_approx1(np.array([1, 9]), 10)
 
 """**Problem 3**"""
 
@@ -80,9 +77,19 @@ eval_approx1(np.array([1, 9]), 10)
 
 
 def norm_evect_approx1(x_0, k):
-    # Put your code here.
-    return  # Put your return value here.
 
+    A = np.array([[1, 1], [2, 0]])
+    x = x_0
+
+    for j in range(1, k + 1):
+        w = np.matmul(A, x)
+        v = w[0] / x[0]
+        x = w / np.linalg.norm(w)
+
+    return (x, v)
+
+
+# norm_evect_approx1(np.array([1, 9]), 10)
 
 """**Problem 4**"""
 
@@ -90,9 +97,21 @@ def norm_evect_approx1(x_0, k):
 
 
 def norm_approx_gen(M, x_0, k):
-    # Put your code here.
-    return  # Put your return value here.
 
+    x = x_0
+
+    for j in range(1, k + 1):
+
+        w = np.matmul(M, x)
+        v = w[0] / x[0]
+
+        x = w / np.linalg.norm(w)
+        x = x / np.max(np.abs(x))
+
+    return x, v
+
+
+# norm_approx_gen(np.array([[2, 4, 6], [4, 8, 0], [1, 2, 9]]), np.array([1, 5, -1]), 10)
 
 """**Problem 5**"""
 
