@@ -143,11 +143,13 @@ def subscriber_vals(x_0, k):
     return x
 
 
+subscriber_vals(np.array([95, 102]), 10)
+
 """**Problem 8**"""
 
 # Replace all of the 0 values with the value requested in Problem 8.
 
-netflix_subs6 = (subscriber_vals(np.array([120, 80]), 6)[0]) / 120
+netflix_subs6 = subscriber_vals(np.array([0.6, 0.4]), 6)[1]
 
 """**Problem 9**"""
 
