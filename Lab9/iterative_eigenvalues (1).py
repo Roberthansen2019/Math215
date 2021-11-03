@@ -54,8 +54,6 @@ def evect_approx1(x_0, k):
     return x
 
 
-# evect_approx1(np.array([1, 9]), 10)
-
 """**Problem 2**"""
 
 # This function approximates the dominant eigenvalue of our matrix A.
@@ -68,8 +66,6 @@ def eval_approx1(x_0, k):
 
     return x_k_1[0] / x_k[0]
 
-
-# eval_approx1(np.array([1, 9]), 10)
 
 """**Problem 3**"""
 
@@ -88,8 +84,6 @@ def norm_evect_approx1(x_0, k):
 
     return (x, v)
 
-
-# norm_evect_approx1(np.array([1, 9]), 10)
 
 """**Problem 4**"""
 
@@ -111,25 +105,28 @@ def norm_approx_gen(M, x_0, k):
     return x, v
 
 
-# norm_approx_gen(np.array([[2, 4, 6], [4, 8, 0], [1, 2, 9]]), np.array([1, 5, -1]), 10)
-
 """**Problem 5**"""
 
 # This function approximates the dominant eigenvalue and eigenvector of an arbitrary matrix using the Rayleigh quotiend as described in Problem 5.
 
 
 def ray_quotient(M, x_0, k):
-    # Put your code here.
-    return  # Put your return value here.
+    evect = norm_approx_gen(M, x_0, k)[0]
+
+    return np.dot((M @ evect), evect) / (np.dot(evect, evect))
 
 
 """**Problem 6**"""
 
 # Replace all of the 0 values with the vectors requested in Problem 6.
 
-x_vect_3 = 0
+x_vect_3 = norm_approx_gen(
+    np.array([[3, 2, -2], [-1, 1, 4], [3, 2, -5]]), np.array([1, 1, 1,]), 3
+)[0]
 
-x_vect_4 = 0
+x_vect_4 = norm_approx_gen(
+    np.array([[3, 2, -2], [-1, 1, 4], [3, 2, -5]]), np.array([1, 1, 1,]), 4
+)[0]
 
 """**Problem 7**"""
 
@@ -137,21 +134,33 @@ x_vect_4 = 0
 
 
 def subscriber_vals(x_0, k):
-    # Put your code here.
-    return  # Put your return value here.
+    P = np.array([[0.7, 0.2], [0.3, 0.8]])
+    x = x_0
+    for j in range(k):
+        temp_var = P @ x
+        x = temp_var
+
+    return x
 
 
 """**Problem 8**"""
 
 # Replace all of the 0 values with the value requested in Problem 8.
 
-netflix_subs6 = 0
+netflix_subs6 = (subscriber_vals(np.array([120, 80]), 6)[0]) / 120
 
 """**Problem 9**"""
 
 # Replace all of the 0 values with the matrix/vector/value requested in Problem 9.
 
-trans_matrix = 0
+trans_matrix = np.array(
+    [
+        [0.8, 0.5, 0.3, 0.2],
+        [0.05, 0.2, 0.1, 0.1],
+        [0.1, 0.1, 0.3, 0.1],
+        [0.05, 0.2, 0.3, 0.6],
+    ]
+)
 
 """**STOP!  BEFORE YOU SUBMIT THIS LAB:**  Go to the "Runtime" menu at the top of this page, and select "Restart and run all".  If any of the cells produce error messages, you will either need to fix the error(s) or delete the code that is causing the error(s).  Then use "Restart and run all" again to see if there are any new errors.  Repeat this until no new error messages show up.
 
