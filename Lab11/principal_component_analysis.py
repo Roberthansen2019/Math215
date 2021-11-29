@@ -96,11 +96,7 @@ Bob = df.loc[df[100] < 0].drop(columns=100).values[1, :]
 # Save the value of the covariance matrix you obtain in Problem 3 as the variable W.
 
 
-def cov_mat(X):
-    return (1 / (len(X) - 1)) * (X @ X.T)
-
-
-W = cov_mat(X_total)
+W = (1 / (X_total.shape[1] - 1)) * (X_total @ X_total.T)
 
 """**Problem 4**"""
 
@@ -112,9 +108,9 @@ L1 = L[np.flip(np.argsort(L))[0]]
 L2 = L[np.flip(np.argsort(L))[1]]
 L3 = L[np.flip(np.argsort(L))[2]]
 
-u1 = P[np.flip(np.argsort(L))[0]]
-u2 = P[np.flip(np.argsort(L))[1]]
-u3 = P[np.flip(np.argsort(L))[2]]
+u1 = P[:, 0]
+u2 = P[:, 1]
+u3 = P[:, 2]
 
 """**Problem 5**"""
 
@@ -122,14 +118,7 @@ u3 = P[np.flip(np.argsort(L))[2]]
 
 total_variance = np.sum(L)
 
-
-def reduced_var(u1_red, u2_red, X_red):
-    W2 = cov_mat(projection_2D(u1_red, u2_red, X_red))
-    L2, P2 = np.linalg.eig(W2)
-    return np.sum(L2)
-
-
-reduced_variance = reduced_var(u1, u2, X_total)
+reduced_variance = L1 + L2
 
 relative_variance = reduced_variance / total_variance
 
@@ -173,19 +162,14 @@ def plot_data(Z1=[], Z2=[], Z3=[], Z4=[]):
     return None
 
 
-plot_data(X_neg_2D)
+plot_data(X_neg_2D, X_pos_2D, Alice_2D, Bob_2D)
 
-plot_data(X_pos_2D)
-
-plot_data(Alice_2D)
-
-plot_data(Bob_2D)
 
 # Save the values of your predictions below.  +1 indicates the individual is predicted to develop this type of cancer (testing positive), while -1 indicates they are predicted not to (testing negative).
 
-Alice_prediction = 0
+Alice_prediction = 1
 
-Bob_prediction = 0
+Bob_prediction = -1
 
 """**STOP!  BEFORE YOU SUBMIT THIS LAB:**  Go to the "Runtime" menu at the top of this page, and select "Restart and run all".  If any of the cells produce error messages, you will either need to fix the error(s) or delete the code that is causing the error(s).  Then use "Restart and run all" again to see if there are any new errors.  Repeat this until no new error messages show up.
 
