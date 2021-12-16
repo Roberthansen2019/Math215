@@ -48,18 +48,12 @@ import matplotlib.pyplot as plt
 def sigma(m, n, s):
     arr = np.zeros((m, n))
 
-    for i in range(m):
-        for j in range(n):
-            if i == j:
-                arr[i, j] = s[i]
-            if (i > len(s) - 1) or (j > len(s) - 1):
-                break
-
+    for i in range(len(s)):
+        arr[i, i] = s[i]
     return arr
 
 
 """**Problem 2**"""
-
 
 # sigma(5, 7, np.array([5, 4, 3]))
 
@@ -84,7 +78,6 @@ def reconstructed_array(u, s, v_t):
 # This function accepts an array A and an integer k, and returns a rank k approximation of A as computed by an SVD.
 
 def lower_rank(A, k):
-
     U, S, V_T = np.linalg.svd(A)
 
     S = sigma(U.shape[0], V_T.shape[0], S)
@@ -122,8 +115,8 @@ whose entries range between 0 and 1 and represent how dark or bright the corresp
 import skimage
 from skimage import io
 
-RGB_array = io.imread('/Users/nicholasoxenden/Oxenden/School/Semesters/Fall 2021/Math 215/Lab13/Lab13Image.png')
-gray_array = io.imread('/Users/nicholasoxenden/Oxenden/School/Semesters/Fall 2021/Math 215/Lab13/Lab13Image.png',
+RGB_array = io.imread("Lab13Image.png")
+gray_array = io.imread("Lab13Image.png",
                        as_gray=True)
 
 # gray_array = skimage.color.rgb2gray(RGB_array)
@@ -179,9 +172,13 @@ rank_100_size = (100 * 100) + 100
 
 relative_size = rank_100_size / original_size
 
-"""**STOP!  BEFORE YOU SUBMIT THIS LAB:**  Go to the "Runtime" menu at the top of this page, and select "Restart and run all".  If any of the cells produce error messages, you will either need to fix the error(s) or delete the code that is causing the error(s).  Then use "Restart and run all" again to see if there are any new errors.  Repeat this until no new error messages show up.
+"""**STOP!  BEFORE YOU SUBMIT THIS LAB:**  Go to the "Runtime" menu at the top of this page, and select "Restart and 
+run all".  If any of the cells produce error messages, you will either need to fix the error(s) or delete the code 
+that is causing the error(s).  Then use "Restart and run all" again to see if there are any new errors.  Repeat this 
+until no new error messages show up. 
 
-**You are not ready to submit until you are able to select "Restart and run all" without any new error messages showing up.  Your code will not be able to be graded if there are any error messages.**
+**You are not ready to submit until you are able to select "Restart and run all" without any new error messages 
+showing up.  Your code will not be able to be graded if there are any error messages.** 
 
-To submit your lab for grading you must first download it to your compute as .py file.  In the "File" menu select "Download .py".  The resulting file can then be uploaded to http://www.math.byu.edu:30000 for grading.
-"""
+To submit your lab for grading you must first download it to your compute as .py file.  In the "File" menu select 
+"Download .py".  The resulting file can then be uploaded to http://www.math.byu.edu:30000 for grading. """
